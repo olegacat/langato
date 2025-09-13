@@ -1,6 +1,6 @@
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-import { FlatCompat } from "@eslint/eslintrc";
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+import { FlatCompat } from '@eslint/eslintrc';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -10,15 +10,45 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
+  ...compat.extends('next/core-web-vitals', 'next/typescript'),
   {
-    ignores: [
-      "node_modules/**",
-      ".next/**",
-      "out/**",
-      "build/**",
-      "next-env.d.ts",
-    ],
+    ignores: ['node_modules/**', '.next/**', 'out/**', 'build/**', 'next-env.d.ts'],
+  },
+  {
+    rules: {
+      // Warn on console.log usage to avoid leaving debug logs in production
+      'no-console': 'warn',
+
+      // Warn on debugger usage to avoid leaving breakpoints
+      'no-debugger': 'warn',
+
+      // Warn about unused variables to keep the code clean
+      'no-unused-vars': 'warn',
+
+      // Warn about empty functions to prevent forgotten or incomplete methods
+      'no-empty-function': 'warn',
+
+      // Prefer const for variables that are never reassigned
+      'prefer-const': 'warn',
+
+      // Require strict equality checks (=== and !==) to avoid type coercion bugs
+      eqeqeq: 'warn',
+
+      // Warn on "magic numbers" without explanation
+      'no-magic-numbers': ['warn', { ignore: [0, 1] }],
+
+      // Require functions to consistently return a value
+      'consistent-return': 'warn',
+
+      // Prevent duplicate imports to keep imports clean
+      'no-duplicate-imports': 'error',
+
+      // TypeScript-specific rules
+      '@typescript-eslint/no-explicit-any': 'error', // disallow any
+      '@typescript-eslint/explicit-function-return-type': 'warn', // require explicit function return types
+      '@typescript-eslint/explicit-module-boundary-types': 'warn', // require explicit types for exported functions
+      '@typescript-eslint/no-inferrable-types': 'warn', // disallow explicit types where TS can infer
+    },
   },
 ];
 
