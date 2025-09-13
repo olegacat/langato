@@ -45,7 +45,6 @@ const eslintConfig = [
 
       // TypeScript-specific rules
       '@typescript-eslint/no-explicit-any': 'error', // disallow any
-      '@typescript-eslint/explicit-function-return-type': 'warn', // require explicit function return types
       '@typescript-eslint/explicit-module-boundary-types': 'warn', // require explicit types for exported functions
       '@typescript-eslint/no-inferrable-types': 'warn', // disallow explicit types where TS can infer
     },
