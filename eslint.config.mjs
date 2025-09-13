@@ -45,7 +45,23 @@ const eslintConfig = [
 
       // TypeScript-specific rules
       '@typescript-eslint/no-explicit-any': 'error', // disallow any
-      '@typescript-eslint/explicit-module-boundary-types': 'warn', // require explicit types for exported functions
+      '@typescript-eslint/explicit-function-return-type': [
+        'warn',
+        {
+          allowExpressions: true, // allow arrow functions (like components)
+          allowTypedFunctionExpressions: true, // allow const fn: () => number
+          allowHigherOrderFunctions: true, // HOFs can infer return type
+          allowConciseArrowFunctionExpressionsStartingWithVoid: true, // allow () => {}
+        },
+      ],
+
+      '@typescript-eslint/explicit-module-boundary-types': [
+        'warn',
+        {
+          allowArgumentsExplicitlyTypedAsAny: false,
+          allowDirectConstAssertionInArrowFunctions: true, // allows const fn = () => {}
+        },
+      ],
       '@typescript-eslint/no-inferrable-types': 'warn', // disallow explicit types where TS can infer
     },
   },
